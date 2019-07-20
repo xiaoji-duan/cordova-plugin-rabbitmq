@@ -74,7 +74,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
             return;
         }
         String format = "window.plugins.RabbitMQPlugin.receivedMessageInAndroidCallback(%s);";
-        final String js = String.format(format, message.encode());
+        final String js = String.format(format, message.toString());
         System.out.println(js);
         cordovaActivity.runOnUiThread(new Runnable() {
             @Override
