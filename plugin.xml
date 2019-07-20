@@ -1,12 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="com.xiaoji.cordova.plugin.rabbitmq" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-  <name>cordova-plugin-rabbitmq</name>
-  <js-module name="RabbitMQPlugin" src="www/cordova-plugin-rabbitmq.js">
-    <clobbers target="cordova.plugins.cordova-plugin-rabbitmq" />
+<plugin id="cordova-plugin-rabbitmq" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>RabbitMQ</name>
+
+  <dependency id="cordova-plugin-device" />
+  <dependency id="cordova-plugin-jcore" />
+
+  <js-module name="RabbitMQPlugin" src="www/RabbitMQPlugin.js">
+    <clobbers target="RabbitMQ" />
   </js-module>
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
-      <feature name="cordova-plugin-rabbitmq">
+      <feature name="RabbitMQPlugin">
         <param name="android-package" value="com.xiaoji.cordova.plugin.rabbitmq.RabbitMQPlugin" />
       </feature>
     </config-file>
