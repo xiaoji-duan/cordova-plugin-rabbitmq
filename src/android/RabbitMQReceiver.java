@@ -14,8 +14,12 @@ public class RabbitMQReceiver extends BroadcastReceiver {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
         //throw new UnsupportedOperationException("Not yet implemented");
-        String extra = intent.getStringExtra("mwxing");
-        JSONObject message = new JSONObject(extra);
-        RabbitMQPlugin.transmitMessageReceived(message);
+        try {
+          String extra = intent.getStringExtra("mwxing");
+          JSONObject message = new JSONObject(extra);
+          RabbitMQPlugin.transmitMessageReceived(message);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
     }
 }

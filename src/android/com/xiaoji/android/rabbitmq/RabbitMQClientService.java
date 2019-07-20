@@ -2,6 +2,8 @@ package com.xiaoji.android.rabbitmq;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
+import android.os.IBinder;
 import android.os.StrictMode;
 import com.rabbitmq.client.*;
 import org.json.JSONException;
@@ -66,4 +68,16 @@ public class RabbitMQClientService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    private MyBinder binder = new MyBinder();
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        // TODO: Return the communication channel to the service.
+        //throw new UnsupportedOperationException("Not yet implemented");
+        return binder;
+    }
+
+    public class MyBinder extends Binder {
+
+    }
 }

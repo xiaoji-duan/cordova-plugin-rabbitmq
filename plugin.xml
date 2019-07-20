@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="com.xiaoji.cordova.plugin.rabbitmq" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>cordova-plugin-rabbitmq</name>
-  <js-module name="cordova-plugin-rabbitmq" src="www/cordova-plugin-rabbitmq.js">
+  <js-module name="RabbitMQPlugin" src="www/cordova-plugin-rabbitmq.js">
     <clobbers target="cordova.plugins.cordova-plugin-rabbitmq" />
   </js-module>
   <platform name="android">
