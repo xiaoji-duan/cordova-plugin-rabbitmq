@@ -53,6 +53,9 @@ public class RabbitMQPlugin extends CordovaPlugin {
      */
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+      if (action.equals("init")) {
+        RabbitMQInterface.init(mContext);
+      }
         if (action.equals("coolMethod")) {
             String message = args.getString(0);
             this.coolMethod(message, callbackContext);
