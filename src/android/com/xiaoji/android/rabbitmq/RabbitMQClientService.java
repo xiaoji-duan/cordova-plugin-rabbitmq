@@ -27,8 +27,6 @@ public class RabbitMQClientService extends Service {
 
             this.channel = this.conn.createChannel();
 
-            AMQPConsumer consumer = new AMQPConsumer(this.channel);
-
             this.channel.basicConsume("queueName", true, "myConsumerTag", new DefaultConsumer(channel) {
 
                 @Override

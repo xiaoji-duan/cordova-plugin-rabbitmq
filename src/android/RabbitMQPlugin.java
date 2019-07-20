@@ -1,5 +1,8 @@
 package com.xiaoji.cordova.plugin.rabbitmq;
 
+import android.app.Activity;
+import android.content.Context;
+
 import org.apache.cordova.CordovaPlugin;
 
 import java.io.IOException;
@@ -20,6 +23,8 @@ import com.xiaoji.android.rabbitmq.RabbitMQInterface;
 public class RabbitMQPlugin extends CordovaPlugin {
 
   private static RabbitMQPlugin instance;
+  private static Activity cordovaActivity;
+
   private Context mContext;
 
   public RabbitMQPlugin() {
