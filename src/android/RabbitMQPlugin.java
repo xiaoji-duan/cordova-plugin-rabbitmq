@@ -48,6 +48,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
      */
     @Override
     protected void pluginInitialize() {
+      System.out.println("RabbitMQPlugin plugin initialize");
     }
 
     /**
@@ -61,6 +62,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
           System.out.println("RabbitMQPlugin mContext is null");
         }
         RabbitMQInterface.init(mContext);
+        return true;
       }
         if (action.equals("coolMethod")) {
             String message = args.getString(0);
