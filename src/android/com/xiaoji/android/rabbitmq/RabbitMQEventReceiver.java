@@ -12,10 +12,10 @@ public class RabbitMQEventReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
       System.out.println("Received action " + intent.getAction());
-      
+
       if (intent.getAction().equals("com.xiaoji.rabbitmq.SERVICE_DESTROY")) {
-          Intent sevice = new Intent(this, RabbitMQClientService.class);
-          this.startService(sevice);
+          Intent sevice = new Intent(context, RabbitMQClientService.class);
+          context.startService(sevice);
       }
     }
 }
