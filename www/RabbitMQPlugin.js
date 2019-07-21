@@ -1,5 +1,3 @@
-var exec = require('cordova/exec');
-
 var RabbitMQPlugin = function() {};
 
 RabbitMQPlugin.prototype.isPlatformIOS = function() {
@@ -35,6 +33,7 @@ RabbitMQPlugin.prototype.callNative = function(
 };
 
 RabbitMQPlugin.prototype.init = function() {
+  console.log("RabbitMQPlugin.prototype.init");
   if (this.isPlatformIOS()) {
     this.callNative("initial", [], null);
   } else {
