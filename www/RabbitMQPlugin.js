@@ -42,11 +42,11 @@ RabbitMQPlugin.prototype.init = function() {
 };
 
 // Common methods
-RabbitMQPlugin.prototype.init = function() {
+RabbitMQPlugin.prototype.coolMethod = function() {
   if (this.isPlatformIOS()) {
-    this.callNative("initial", [], null);
+    this.callNative("coolMethod", [], null);
   } else {
-    this.callNative("init", [], null);
+    this.callNative("coolMethod", [], null);
   }
 };
 
