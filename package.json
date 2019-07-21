@@ -25,5 +25,12 @@
       "cordova-plugin-jcore": "*"
   },
   "author": "leon_xi@163.com",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "cordovaDependencies": {
+      "0.0.1": {
+        "cordova-android": ">=6.5.0"
+      }
+    }
+  }
 }
