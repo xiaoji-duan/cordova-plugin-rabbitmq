@@ -28,11 +28,13 @@ public class RabbitMQPlugin extends CordovaPlugin {
   private Context mContext;
 
   public RabbitMQPlugin() {
+    System.out.println("RabbitMQPlugin constructor");
     instance = this;
   }
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+      System.out.println("RabbitMQPlugin initialize");
         super.initialize(cordova, webView);
         mContext = cordova.getActivity().getApplicationContext();
 
@@ -55,6 +57,9 @@ public class RabbitMQPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
       System.out.println("RabbitMQPlugin action " + action);
       if (action.equals("init")) {
+        if (mContext == null) {
+          System.out.println("RabbitMQPlugin mContext is null");
+        }
         RabbitMQInterface.init(mContext);
       }
         if (action.equals("coolMethod")) {
