@@ -20,12 +20,15 @@ matrix:
         packages:
         - yarn
         - jq
-        - gradle
     licenses:
       - android-sdk-preview-license-.+
       - android-sdk-license-.+
       - google-gdk-license-.+
 before_install:
+  - curl -s "https://get.sdkman.io" | bash
+  - source "$HOME/.sdkman/bin/sdkman-init.sh"
+  - sdk version
+  - sdk install gradle
   - export LANG=zh_CN.UTF-8
   - export GRADLE_HOME=/usr/local/gradle
   - export PATH=$GRADLE_HOME/bin:$PATH
