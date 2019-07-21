@@ -1,0 +1,49 @@
+matrix:
+  include:
+  - os: linux
+    sudo: true
+    language: android
+    android:
+      components:
+      - platform-tools
+      - tools
+      - build-tools-26.0.2
+      - android-27
+      - extra-google-google_play_services
+      - extra-google-m2repository
+      - extra-android-m2repository
+    addons:
+      apt:
+        sources:
+        - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
+          key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
+        packages:
+        - yarn
+        - jq
+        - gradle
+    licenses:
+      - android-sdk-preview-license-.+
+      - android-sdk-license-.+
+      - google-gdk-license-.+
+before_install:
+  - export LANG=zh_CN.UTF-8
+  - export GRADLE_HOME=/usr/local/gradle
+  - export PATH=$GRADLE_HOME/bin:$PATH
+  - nvm install 8
+before_script:
+  - yarn global add ionic@4.1.2 phonegap plugman cordova@6.5.0
+  - mkdir -p $ANDROID_HOME/licenses
+  - echo -e "d56f5187479451eabf01fb78af6dfcb131a6481e" >> $ANDROID_HOME/licenses/android-sdk-license
+  - echo -e "84831b9409646a918e30573bab4c9c91346d8abd" >> $ANDROID_HOME/licenses/android-sdk-preview-license
+script:
+  - cordova create hello com.xiaoji.hello HelloCordova
+  - cd hello
+  - cordova platform add android
+  - cordova plugin add https://github.com/xiaoji-duan/cordova-plugin-rabbitmq.git
+  - cordova build android
+env:
+  global:
+  - LANG=zh_CN.UTF-8
+  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+jdk:
+  - oraclejdk8
