@@ -40,7 +40,7 @@ script:
   - cd hello
   - cordova platform add android
   - cordova plugin add https://github.com/xiaoji-duan/cordova-plugin-rabbitmq.git
-  - cordova build android
+  - cordova build android -- --gradleArg=-Pandroid.compileOptions.sourceCompatibility=1.8 --gradleArg=-Pandroid.compileOptions.targetCompatibility=1.8 
 env:
   global:
   - LANG=zh_CN.UTF-8
