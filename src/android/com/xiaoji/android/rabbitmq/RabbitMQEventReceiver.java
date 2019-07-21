@@ -11,9 +11,11 @@ public class RabbitMQEventReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: This method is called when the BroadcastReceiver is receiving
-        // an Intent broadcast.
-        //throw new UnsupportedOperationException("Not yet implemented");
-        RabbitMQInterface.init(context);
+      System.out.println("Received action " + intent.getAction());
+      
+      if (intent.getAction().equals("com.xiaoji.rabbitmq.SERVICE_DESTROY")) {
+          Intent sevice = new Intent(this, RabbitMQClientService.class);
+          this.startService(sevice);
+      }
     }
 }

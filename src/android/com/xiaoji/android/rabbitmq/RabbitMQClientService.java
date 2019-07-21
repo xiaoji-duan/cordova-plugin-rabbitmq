@@ -73,7 +73,15 @@ public class RabbitMQClientService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         System.out.println("Kathy onStartCommand - startId = " + startId + ", Thread ID = " + Thread.currentThread().getId());
         connect();
-        return super.onStartCommand(intent, flags, startId);
+        return super.onStartCommand(intent, START_STICKY, startId);
+    }
+
+    @Override
+    public void onDestroy(){
+        stopForeground(true);
+        Intent intent = new Intent("com.xiaoji.rabbitmq.SERVICE_DESTROY");
+        sendBroadcast(intent);
+        super.onDestroy();
     }
 
     private MyBinder binder = new MyBinder();
@@ -88,4 +96,5 @@ public class RabbitMQClientService extends Service {
     public class MyBinder extends Binder {
 
     }
+
 }
