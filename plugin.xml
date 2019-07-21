@@ -48,7 +48,8 @@
     </config-file>
 
     <lib-file src="libs/android/amqp-client-4.11.2.jar" />
-
+    <lib-file src="slf4j-api-1.7.26" />
+    
     <source-file src="src/android/com/xiaoji/android/rabbitmq/RabbitMQClientService.java" target-dir="src/com/xiaoji/android/rabbitmq" />
     <source-file src="src/android/com/xiaoji/android/rabbitmq/RabbitMQInterface.java" target-dir="src/com/xiaoji/android/rabbitmq/" />
     <source-file src="src/android/com/xiaoji/android/rabbitmq/RabbitMQEventReceiver.java" target-dir="src/com/xiaoji/android/rabbitmq/" />
