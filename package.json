@@ -2,7 +2,14 @@
   "name": "cordova-plugin-rabbitmq",
   "version": "0.0.1",
   "description": "Cordova plugin for RabbitMQ AMQP",
-  "main": "RabbitMQPlugin.js",
+  "cordova": {
+      "id": "cordova-plugin-rabbitmq",
+      "platforms": [
+          "ios",
+          "android"
+      ]
+  },
+  "module": "./types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +20,10 @@
     "rabbitmq",
     "amqp"
   ],
+  "devDependencies": {
+      "cordova-plugin-device": "*",
+      "cordova-plugin-jcore": "*"
+  },
   "author": "leon_xi@163.com",
   "license": "MIT"
 }
