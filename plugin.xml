@@ -15,12 +15,12 @@
       </feature>
     </config-file>
 
-    <config-file target="AndroidManifest.xml" parent="/manifest" mode="merge">
+    <config-file target="AndroidManifest.xml" parent="/*" mode="merge">
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     </config-file>
 
-    <config-file target="AndroidManifest.xml" parent="/manifest/application" mode="merge">
+    <config-file target="AndroidManifest.xml" parent="/*" mode="merge">
       <service
         android:name="com.xiaoji.android.rabbitmq.RabbitMQClientService"
         android:enabled="true"
