@@ -73,7 +73,8 @@ public class RabbitMQClientService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         System.out.println("Kathy onStartCommand - startId = " + startId + ", Thread ID = " + Thread.currentThread().getId());
         connect();
-        return super.onStartCommand(intent, START_STICKY, startId);
+        //return super.onStartCommand(intent, START_STICKY, startId);
+        return START_STICKY;
     }
 
     @Override
