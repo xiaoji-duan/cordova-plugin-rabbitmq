@@ -6,7 +6,7 @@
   <dependency id="cordova-plugin-jcore" />
 
   <js-module name="RabbitMQPlugin" src="www/RabbitMQPlugin.js">
-    <clobbers target="RabbitMQ" />
+    <clobbers target="RabbitMQPlugin" />
   </js-module>
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
