@@ -35,7 +35,10 @@
               android:exported="true">
           <intent-filter>
               <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+          </intent-filter>
+          <intent-filter android:priority="1000">
               <action android:name="com.xiaoji.rabbitmq.SERVICE_DESTROY" />
+              <category android:name="$PACKAGE_NAME" />
           </intent-filter>
       </receiver>
       <receiver
