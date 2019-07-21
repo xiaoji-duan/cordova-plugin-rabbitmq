@@ -21,8 +21,17 @@
         android:enabled="true"
         android:exported="true"
         android:process=":rabbitmq"
-        android:permission="android.permission.INTERNET">
+        android:permission="android.permission.INTERNET"
+        android:permission="android.permission.ACCESS_NETWORK_STATE">
       </service>
+      <receiver
+              android:name=".RabbitMQEventReceiver"
+              android:enabled="true"
+              android:exported="true">
+          <intent-filter>
+              <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+          </intent-filter>
+      </receiver>
       <receiver
               android:name=".RabbitMQReceiver"
               android:enabled="true"
@@ -36,6 +45,7 @@
     <source-file src="libs/android/amqp-client-4.11.2.jar" target-dir="libs" />
     <source-file src="src/android/com/xiaoji/android/rabbitmq/RabbitMQClientService.java" target-dir="src/com/xiaoji/android/rabbitmq" />
     <source-file src="src/android/com/xiaoji/android/rabbitmq/RabbitMQInterface.java" target-dir="src/com/xiaoji/android/rabbitmq/" />
+    <source-file src="src/android/com/xiaoji/android/rabbitmq/RabbitMQEventReceiver.java" target-dir="src/com/xiaoji/android/rabbitmq/" />
     <source-file src="src/android/RabbitMQPlugin.java" target-dir="src/com/xiaoji/cordova/plugin/rabbitmq" />
     <source-file src="src/android/RabbitMQReceiver.java" target-dir="src/com/xiaoji/cordova/plugin/rabbitmq" />
   </platform>
