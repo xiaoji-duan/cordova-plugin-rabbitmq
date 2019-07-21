@@ -24,6 +24,11 @@ matrix:
       - android-sdk-preview-license-.+
       - android-sdk-license-.+
       - google-gdk-license-.+
+  - os: osx
+    language: objective-c
+    osx_image: xcode10.2
+  allow_failures:
+    - os: osx
 before_install:
   - curl -s "https://get.sdkman.io" | bash
   - source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -34,16 +39,14 @@ before_install:
   - export PATH=$GRADLE_HOME/bin:$PATH
   - nvm install 8
 before_script:
-  - yarn global add ionic@4.1.2 phonegap plugman cordova@6.5.0
-  - mkdir -p $ANDROID_HOME/licenses
-  - echo -e "d56f5187479451eabf01fb78af6dfcb131a6481e" >> $ANDROID_HOME/licenses/android-sdk-license
-  - echo -e "84831b9409646a918e30573bab4c9c91346d8abd" >> $ANDROID_HOME/licenses/android-sdk-preview-license
+  - sh $TRAVIS_BUILD_DIR/.travis/preinstall.sh
 script:
   - cordova create hello com.xiaoji.hello HelloCordova
   - cd hello
-  - cordova platform add android
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cordova platform add android ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cordova platform add ios ; fi
   - cordova plugin add https://github.com/xiaoji-duan/cordova-plugin-rabbitmq.git
-  - cordova build android -- --gradleArg=-Pandroid.compileOptions.sourceCompatibility=1.8 --gradleArg=-Pandroid.compileOptions.targetCompatibility=1.8 --gradleArg=-Pandroid.enableD8.desugaring=false
+  - sh $TRAVIS_BUILD_DIR/.travis/build.sh
 env:
   global:
   - LANG=zh_CN.UTF-8
