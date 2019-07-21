@@ -34,10 +34,11 @@ RabbitMQPlugin.prototype.callNative = function(
 };
 
 RabbitMQPlugin.prototype.init = function() {
-  console.log("RabbitMQPlugin.prototype.init");
   if (this.isPlatformIOS()) {
+    console.log("RabbitMQPlugin.prototype.initial");
     this.callNative("initial", [], null);
   } else {
+    console.log("RabbitMQPlugin.prototype.init");
     this.callNative("init", [], null);
   }
 };
@@ -60,5 +61,3 @@ if (!window.plugins.RabbitMQPlugin) {
 }
 
 module.exports = new RabbitMQPlugin();
-
-console.log("RabbitMQPlugin initialized");
