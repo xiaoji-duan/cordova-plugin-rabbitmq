@@ -1,3 +1,4 @@
+var exec = require('cordova/exec');
 var RabbitMQPlugin = function() {};
 
 RabbitMQPlugin.prototype.isPlatformIOS = function() {
@@ -20,9 +21,9 @@ RabbitMQPlugin.prototype.callNative = function(
   errorCallback
 ) {
   if (errorCallback) {
-    cordova.exec(successCallback, errorCallback, "RabbitMQPlugin", name, args);
+    exec(successCallback, errorCallback, "RabbitMQPlugin", name, args);
   } else {
-    cordova.exec(
+    exec(
       successCallback,
       this.errorCallback,
       "RabbitMQPlugin",
