@@ -22,7 +22,7 @@
 
     <config-file target="AndroidManifest.xml" parent="/manifest/application" mode="merge">
       <service
-        android:name=".RabbitMQClientService"
+        android:name="com.xiaoji.android.rabbitmq.RabbitMQClientService"
         android:enabled="true"
         android:exported="true"
         android:process=":rabbitmq"
@@ -30,7 +30,7 @@
         android:permission="android.permission.ACCESS_NETWORK_STATE">
       </service>
       <receiver
-              android:name=".RabbitMQEventReceiver"
+              android:name="com.xiaoji.android.rabbitmq.RabbitMQEventReceiver"
               android:enabled="true"
               android:exported="true">
           <intent-filter>
@@ -38,7 +38,7 @@
           </intent-filter>
       </receiver>
       <receiver
-              android:name=".RabbitMQReceiver"
+              android:name="com.xiaoji.cordova.plugin.rabbitmq.RabbitMQReceiver"
               android:enabled="true"
               android:exported="true">
           <intent-filter>
@@ -48,7 +48,7 @@
     </config-file>
 
     <lib-file src="libs/android/amqp-client-4.11.2.jar" />
-    
+
     <source-file src="src/android/com/xiaoji/android/rabbitmq/RabbitMQClientService.java" target-dir="src/com/xiaoji/android/rabbitmq" />
     <source-file src="src/android/com/xiaoji/android/rabbitmq/RabbitMQInterface.java" target-dir="src/com/xiaoji/android/rabbitmq/" />
     <source-file src="src/android/com/xiaoji/android/rabbitmq/RabbitMQEventReceiver.java" target-dir="src/com/xiaoji/android/rabbitmq/" />
