@@ -81,6 +81,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
     }
 
     static void transmitMessageReceived(JSONObject message) {
+      System.out.println("received message transmit to mwxing.");
         if (instance == null) {
             return;
         }
