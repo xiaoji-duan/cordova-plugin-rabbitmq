@@ -60,3 +60,5 @@ if (!window.plugins.RabbitMQPlugin) {
 }
 
 module.exports = new RabbitMQPlugin();
+
+console.log("RabbitMQPlugin initialized");
