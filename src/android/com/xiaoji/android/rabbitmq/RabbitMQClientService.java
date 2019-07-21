@@ -27,6 +27,14 @@ public class RabbitMQClientService extends Service {
 
             this.conn = factory.newConnection();
 
+            this.conn.addShutdownListener(new ShutdownListener() {
+                @Override
+                public void shutdownCompleted(ShutdownSignalException cause) {
+                    System.out.println("RabbitMQ shutdown completed. reconnecting ...");
+                    connect();
+                }
+            });
+
             this.channel = this.conn.createChannel();
 
             this.channel.basicConsume("queueName", true, "myConsumerTag", new DefaultConsumer(channel) {
