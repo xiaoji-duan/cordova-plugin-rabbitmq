@@ -52,7 +52,7 @@ public class RabbitMQClientService extends Service {
 
     public class MyBinder extends Binder {
       public Service getService() {
-        return this;
+        return RabbitMQClientService.this;
       }
     }
 
