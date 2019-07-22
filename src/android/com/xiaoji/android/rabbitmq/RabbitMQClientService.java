@@ -8,66 +8,11 @@ import android.os.StrictMode;
 import com.rabbitmq.client.*;
 import org.json.JSONException;
 import org.json.JSONObject;
+import cn.jiguang.api.JCoreInterface;
 
 import java.io.IOException;
 
 public class RabbitMQClientService extends Service {
-
-    private Connection conn = null;
-    private Channel channel = null;
-
-    private void connect() {
-      if (this.conn != null) {
-          if (this.conn.isOpen()) {
-              return;
-          }
-      }
-
-        ConnectionFactory factory = new ConnectionFactory();
-        try {
-            factory.setHost("pluto.guobaa.com");
-            factory.setPort(5672);
-            factory.setUsername("gtd_mq");
-            factory.setPassword("gtd_mq");
-            factory.setVirtualHost("/");
-
-            this.conn = factory.newConnection();
-
-            this.conn.addShutdownListener(new ShutdownListener() {
-                @Override
-                public void shutdownCompleted(ShutdownSignalException cause) {
-                    System.out.println("RabbitMQ shutdown completed. reconnecting ...");
-                    connect();
-                }
-            });
-
-            this.channel = this.conn.createChannel();
-
-            this.channel.basicConsume("queueName", true, "myConsumerTag", new DefaultConsumer(channel) {
-
-                @Override
-                public void handleDelivery(String consumerTag,
-                                           Envelope envelope,
-                                           AMQP.BasicProperties properties,
-                                           byte[] body)
-                        throws IOException {
-                    JSONObject payload = null;
-                    try {
-                        payload = new JSONObject(new String(body, "utf-8"));
-                        System.out.println(payload.toString());
-                        Intent sendIntent = new Intent();
-                        sendIntent.putExtra("mwxing", new String(body, "utf-8"));
-                        sendIntent.setAction("com.xiaoji.rabbitmq.MESSAGE_RECEIVED");
-                        startActivity(sendIntent);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public RabbitMQClientService() {
         System.out.println("RabbitMQ");
@@ -76,9 +21,14 @@ public class RabbitMQClientService extends Service {
     }
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+        JCoreInterface.asyncExecute(new MQ());
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         System.out.println("Kathy onStartCommand - startId = " + startId + ", Thread ID = " + Thread.currentThread().getId());
-        connect();
         //return super.onStartCommand(intent, START_STICKY, startId);
         return START_STICKY;
     }
@@ -104,4 +54,76 @@ public class RabbitMQClientService extends Service {
 
     }
 
+    class MQ implements Runnable {
+        private Connection conn = null;
+        private Channel channel = null;
+
+        public void run() {
+            try {
+                if (android.os.Build.VERSION.SDK_INT > 9) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                }
+
+                connect();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                System.out.println("MQ TEST" + ex.getMessage());
+            }
+        }
+
+        private void connect() {
+          if (this.conn != null) {
+              if (this.conn.isOpen()) {
+                  return;
+              }
+          }
+
+          ConnectionFactory factory = new ConnectionFactory();
+          try {
+              factory.setHost("pluto.guobaa.com");
+              factory.setPort(5672);
+              factory.setUsername("gtd_mq");
+              factory.setPassword("gtd_mq");
+              factory.setVirtualHost("/");
+              factory.setAutomaticRecoveryEnabled(true);
+              factory.setShutdownTimeout(0);
+              factory.setRequestedHeartbeat(5000);
+              factory.setHandshakeTimeout(5000);
+              factory.setNetworkRecoveryInterval(5000);
+
+              this.conn = factory.newConnection();
+
+              this.channel = this.conn.createChannel();
+
+              this.channel.basicConsume("queueName", false, "myConsumerTag", new DefaultConsumer(channel) {
+
+                  @Override
+                  public void handleDelivery(String consumerTag,
+                                             Envelope envelope,
+                                             AMQP.BasicProperties properties,
+                                             byte[] body)
+                          throws IOException {
+                      JSONObject payload = null;
+                      long deliveryTag = envelope.getDeliveryTag();
+
+                      try {
+                          payload = new JSONObject(new String(body, "utf-8"));
+                          System.out.println(payload.toString());
+                          Intent sendIntent = new Intent();
+                          sendIntent.putExtra("mwxing", new String(body, "utf-8"));
+                          sendIntent.setAction("com.xiaoji.rabbitmq.MESSAGE_RECEIVED");
+                          startActivity(sendIntent);
+
+                          channel.basicAck(deliveryTag, false);
+                      } catch (JSONException e) {
+                          e.printStackTrace();
+                      }
+                  }
+                  });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
