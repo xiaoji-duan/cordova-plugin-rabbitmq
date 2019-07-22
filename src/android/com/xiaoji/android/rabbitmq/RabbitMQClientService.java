@@ -17,6 +17,12 @@ public class RabbitMQClientService extends Service {
     private Channel channel = null;
 
     private void connect() {
+      if (this.conn != null) {
+          if (this.conn.isOpen()) {
+              return;
+          }
+      }
+
         ConnectionFactory factory = new ConnectionFactory();
         try {
             factory.setHost("pluto.guobaa.com");
