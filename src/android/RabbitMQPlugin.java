@@ -2,6 +2,7 @@ package com.xiaoji.cordova.plugin.rabbitmq;
 
 import android.app.Activity;
 import android.content.Context;
+import android.app.Service;
 
 import org.apache.cordova.CordovaPlugin;
 
@@ -26,6 +27,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
   private static Activity cordovaActivity;
 
   private Context mContext;
+  public Service service;
 
   public RabbitMQPlugin() {
     System.out.println("RabbitMQPlugin constructor");

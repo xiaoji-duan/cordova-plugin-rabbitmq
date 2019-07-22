@@ -3,9 +3,13 @@ package com.xiaoji.android.rabbitmq;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.IBinder;
+import android.content.ComponentName;
+
+import com.xiaoji.cordova.plugin.rabbitmq.RabbitMQPlugin;
 
 public class RabbitMQInterface {
-    public static void init(Context ctx) {
+    public static void init(Context ctx, RabbitMQPlugin plugin) {
       System.out.println("RabbitMQInterface init");
         Intent intent = new Intent(ctx, RabbitMQClientService.class);
         //ctx.startService(intent);
@@ -14,7 +18,7 @@ public class RabbitMQInterface {
             public void onServiceConnected(ComponentName name, IBinder service) {
                 RabbitMQClientService.MyBinder binder =
                         (RabbitMQClientService.MyBinder) service;
-                instance.service = binder.getService();
+                plugin.service = binder.getService();
             }
 
             @Override
