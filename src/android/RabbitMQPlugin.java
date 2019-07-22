@@ -40,7 +40,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
         super.initialize(cordova, webView);
         mContext = cordova.getActivity().getApplicationContext();
 
-        RabbitMQInterface.init(mContext);
+        RabbitMQInterface.init(mContext, instance);
 
         cordovaActivity = cordova.getActivity();
     }
@@ -63,7 +63,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
         if (mContext == null) {
           System.out.println("RabbitMQPlugin mContext is null");
         }
-        RabbitMQInterface.init(mContext);
+        RabbitMQInterface.init(mContext, instance);
         return true;
       }
         if (action.equals("coolMethod")) {

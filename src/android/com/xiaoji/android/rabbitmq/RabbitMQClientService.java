@@ -51,7 +51,9 @@ public class RabbitMQClientService extends Service {
     }
 
     public class MyBinder extends Binder {
-
+      public Service getService() {
+        return this;
+      }
     }
 
     class MQ implements Runnable {
