@@ -16,6 +16,7 @@
     </config-file>
 
     <config-file target="AndroidManifest.xml" parent="/manifest" mode="merge">
+      <permission android:name="com.xiaoji.rabbitmq.permission.MESSAGE_RECEIVED" android:protectionLevel="signature" />
       <uses-permission android:name="com.xiaoji.rabbitmq.permission.MESSAGE_RECEIVED" />
 
       <uses-permission android:name="android.permission.INTERNET" />
