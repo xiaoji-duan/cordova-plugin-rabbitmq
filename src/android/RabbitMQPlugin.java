@@ -2,6 +2,7 @@ package com.xiaoji.cordova.plugin.rabbitmq;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.app.Service;
 import android.util.Log;
 
@@ -29,10 +30,26 @@ public class RabbitMQPlugin extends CordovaPlugin {
 
   private Context mContext;
   public Service service;
+  private RabbitMQReceiver mqReceiver;
 
   public RabbitMQPlugin() {
     Log.i("RabbitMQPlugin", "RabbitMQPlugin constructor");
     instance = this;
+  }
+
+  @Override
+  public void onStart() {
+    mqReceiver = new RabbitMQReceiver;
+
+    IntentFilter intentFilter = new IntentFilter();
+    intentFilter.addAction("com.xiaoji.cordova.plugin.rabbitmq.MESSAGE_RECEIVED");
+
+    cordovaActivity.registerReceiver(mqReceiver, intentFilter);
+  }
+
+  @Override
+  public void onStop() {
+    cordovaActivity.unregisterReceiver(mqReceiver);
   }
 
     @Override
