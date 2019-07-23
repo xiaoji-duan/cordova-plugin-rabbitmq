@@ -121,12 +121,12 @@ public class RabbitMQClientService extends Service {
 
                           channel.basicAck(deliveryTag, false);
                       } catch (JSONException e) {
-                          e.printStackTrace();
+                          Log.e("RabbitMQPlugin", "JSON format error", e.getCause());
                       }
                   }
                   });
             } catch (Exception e) {
-                e.printStackTrace();
+              Log.e("RabbitMQPlugin", "RabbitMQ connection error", e.getCause());
             }
         }
     }
