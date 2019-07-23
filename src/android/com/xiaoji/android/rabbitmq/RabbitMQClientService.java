@@ -114,9 +114,9 @@ public class RabbitMQClientService extends Service {
                       try {
                           payload = new JSONObject(new String(body, "utf-8"));
                           Log.i("RabbitMQPlugin", payload.toString());
-                          Intent sendIntent = new Intent("com.xiaoji.rabbitmq.MESSAGE_RECEIVED");
+                          Intent sendIntent = new Intent("com.xiaoji.cordova.plugin.rabbitmq.MESSAGE_RECEIVED");
                           // Android 8 later
-                          sendIntent.setComponent(new ComponentName("com.xiaoji.cordova.plugin.rabbitmq", "com.xiaoji.cordova.plugin.rabbitmq.RabbitMQReceiver"));
+                          sendIntent.setComponent(new ComponentName("com.xiaoji.cordova.plugin.rabbitmq", "com.xiaoji.cordova.plugin.rabbitmq.component.broadcastReceiver.RabbitMQReceiver"));
                           sendIntent.putExtra("mwxing", new String(body, "utf-8"));
                           sendBroadcast(sendIntent);
                           Log.i("RabbitMQPlugin", "Broadcast Sent.");
