@@ -65,6 +65,7 @@
         <param name="ios-package" value="RabbitMQPlugin" />
       </feature>
     </config-file>
+    <header-file src="src/ios/RabbitMQPlugin.h" />
     <source-file src="src/ios/RabbitMQPlugin.m" />
   </platform>
 </plugin>
