@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.StrictMode;
+import android.util.Log;
+
 import com.rabbitmq.client.*;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +17,7 @@ import java.io.IOException;
 public class RabbitMQClientService extends Service {
 
     public RabbitMQClientService() {
-        System.out.println("RabbitMQ");
+        Log.i("RabbitMQPlugin", "RabbitMQ");
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
@@ -28,7 +30,7 @@ public class RabbitMQClientService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        System.out.println("Kathy onStartCommand - startId = " + startId + ", Thread ID = " + Thread.currentThread().getId());
+        Log.i("RabbitMQPlugin", "Kathy onStartCommand - startId = " + startId + ", Thread ID = " + Thread.currentThread().getId());
         //return super.onStartCommand(intent, START_STICKY, startId);
         return START_STICKY;
     }
@@ -70,7 +72,7 @@ public class RabbitMQClientService extends Service {
                 connect();
             } catch (Exception ex) {
                 ex.printStackTrace();
-                System.out.println("MQ TEST" + ex.getMessage());
+                Log.i("RabbitMQPlugin", "MQ TEST" + ex.getMessage());
             }
         }
 
@@ -111,7 +113,7 @@ public class RabbitMQClientService extends Service {
 
                       try {
                           payload = new JSONObject(new String(body, "utf-8"));
-                          System.out.println(payload.toString());
+                          Log.i("RabbitMQPlugin", payload.toString());
                           Intent sendIntent = new Intent();
                           sendIntent.putExtra("mwxing", new String(body, "utf-8"));
                           sendIntent.setAction("com.xiaoji.rabbitmq.MESSAGE_RECEIVED");

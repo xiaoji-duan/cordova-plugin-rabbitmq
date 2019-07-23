@@ -3,6 +3,7 @@ package com.xiaoji.cordova.plugin.rabbitmq;
 import android.app.Activity;
 import android.content.Context;
 import android.app.Service;
+import android.util.Log;
 
 import org.apache.cordova.CordovaPlugin;
 
@@ -30,13 +31,13 @@ public class RabbitMQPlugin extends CordovaPlugin {
   public Service service;
 
   public RabbitMQPlugin() {
-    System.out.println("RabbitMQPlugin constructor");
+    Log.i("RabbitMQPlugin", "RabbitMQPlugin constructor");
     instance = this;
   }
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-      System.out.println("RabbitMQPlugin initialize");
+      Log.i("RabbitMQPlugin", "RabbitMQPlugin initialize");
         super.initialize(cordova, webView);
         mContext = cordova.getActivity().getApplicationContext();
 
@@ -50,7 +51,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
      */
     @Override
     protected void pluginInitialize() {
-      System.out.println("RabbitMQPlugin plugin initialize");
+      Log.i("RabbitMQPlugin", "RabbitMQPlugin plugin initialize");
     }
 
     /**
@@ -58,10 +59,10 @@ public class RabbitMQPlugin extends CordovaPlugin {
      */
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-      System.out.println("RabbitMQPlugin action " + action);
+      Log.i("RabbitMQPlugin", "RabbitMQPlugin action " + action);
       if (action.equals("init")) {
         if (mContext == null) {
-          System.out.println("RabbitMQPlugin mContext is null");
+          Log.i("RabbitMQPlugin", "RabbitMQPlugin mContext is null");
         }
         RabbitMQInterface.init(mContext, instance);
         return true;
@@ -83,13 +84,13 @@ public class RabbitMQPlugin extends CordovaPlugin {
     }
 
     static void transmitMessageReceived(JSONObject message) {
-      System.out.println("received message transmit to mwxing.");
+      Log.i("RabbitMQPlugin", "received message transmit to mwxing.");
         if (instance == null) {
             return;
         }
         String format = "window.plugins.RabbitMQPlugin.receivedMessageInAndroidCallback(%s);";
         final String js = String.format(format, message.toString());
-        System.out.println(js);
+        Log.i("RabbitMQPlugin", js);
         cordovaActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
