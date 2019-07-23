@@ -46,6 +46,8 @@
     if (!SharedRabbitMQPlugin) {
         SharedRabbitMQPlugin = self;
     }
+    
+    [self startRabbitMQ];
 }
 
 -(void)startRabbitMQ{
