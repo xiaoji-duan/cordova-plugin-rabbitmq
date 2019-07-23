@@ -18,7 +18,7 @@ public class RabbitMQReceiver extends BroadcastReceiver {
           JSONObject message = new JSONObject(extra);
           RabbitMQPlugin.transmitMessageReceived(message);
         } catch (Exception e) {
-          e.printStackTrace();
+          Log.e("RabbitMQPlugin", "Receiver error", e.getCause());
         }
     }
 }
