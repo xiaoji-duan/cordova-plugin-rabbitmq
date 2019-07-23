@@ -127,7 +127,7 @@ public class RabbitMQClientService extends Service {
                           Log.e("RabbitMQPlugin", "JSON format error", e.getCause());
                       }
                   }
-                  });
+                });
             } catch (Exception e) {
               Log.e("RabbitMQPlugin", "RabbitMQ connection error", e.getCause());
             }
