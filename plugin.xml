@@ -44,12 +44,11 @@
           </intent-filter>
       </receiver>
       <receiver
-              android:name=".RabbitMQReceiver"
+              android:name="com.xiaoji.cordova.plugin.rabbitmq.RabbitMQReceiver"
               android:enabled="true"
               android:exported="true">
           <intent-filter>
               <action android:name="com.xiaoji.cordova.plugin.rabbitmq.MESSAGE_RECEIVED" />
-              <category android:name="android.intent.category.DEFAULT" />
           </intent-filter>
       </receiver>
     </config-file>
