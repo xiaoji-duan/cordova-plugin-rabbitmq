@@ -70,9 +70,8 @@ public class RabbitMQClientService extends Service {
                 }
 
                 connect();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                Log.i("RabbitMQPlugin", "MQ TEST" + ex.getMessage());
+            } catch (Exception e) {
+              Log.e("RabbitMQPlugin", "RabbitMQ connect error", e.getCause());
             }
         }
 
