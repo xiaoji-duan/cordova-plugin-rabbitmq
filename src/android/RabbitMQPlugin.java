@@ -39,7 +39,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
 
   @Override
   public void onStart() {
-    mqReceiver = new RabbitMQReceiver;
+    mqReceiver = new RabbitMQReceiver();
 
     IntentFilter intentFilter = new IntentFilter();
     intentFilter.addAction("com.xiaoji.cordova.plugin.rabbitmq.MESSAGE_RECEIVED");
