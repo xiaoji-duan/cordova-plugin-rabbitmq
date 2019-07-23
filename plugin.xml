@@ -34,7 +34,7 @@
       <receiver
               android:name="com.xiaoji.android.rabbitmq.RabbitMQEventReceiver"
               android:enabled="true"
-              android:exported="true">
+              android:exported="false">
           <intent-filter>
               <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
           </intent-filter>
@@ -46,7 +46,7 @@
       <receiver
               android:name="com.xiaoji.cordova.plugin.rabbitmq.RabbitMQReceiver"
               android:enabled="true"
-              android:exported="true"
+              android:exported="false"
               android:permission="com.xiaoji.rabbitmq.MESSAGE_RECEIVED">
           <intent-filter>
               <action android:name="com.xiaoji.rabbitmq.MESSAGE_RECEIVED" />

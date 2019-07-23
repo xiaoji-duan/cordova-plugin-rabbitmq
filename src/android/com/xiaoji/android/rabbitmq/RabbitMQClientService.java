@@ -113,10 +113,9 @@ public class RabbitMQClientService extends Service {
                       try {
                           payload = new JSONObject(new String(body, "utf-8"));
                           Log.i("RabbitMQPlugin", payload.toString());
-                          Intent sendIntent = new Intent();
+                          Intent sendIntent = new Intent("com.xiaoji.rabbitmq.MESSAGE_RECEIVED");
                           sendIntent.putExtra("mwxing", new String(body, "utf-8"));
-                          sendIntent.setAction("com.xiaoji.rabbitmq.MESSAGE_RECEIVED");
-                          startActivity(sendIntent);
+                          sendBroadcast(sendIntent);
 
                           channel.basicAck(deliveryTag, false);
                       } catch (Exception e) {
