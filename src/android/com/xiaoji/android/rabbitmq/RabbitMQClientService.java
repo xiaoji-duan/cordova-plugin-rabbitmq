@@ -2,6 +2,7 @@ package com.xiaoji.android.rabbitmq;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.ComponentName;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.StrictMode;
@@ -114,6 +115,8 @@ public class RabbitMQClientService extends Service {
                           payload = new JSONObject(new String(body, "utf-8"));
                           Log.i("RabbitMQPlugin", payload.toString());
                           Intent sendIntent = new Intent("com.xiaoji.rabbitmq.MESSAGE_RECEIVED");
+                          // Android 8 later
+                          sendIntent.setComponent(new ComponentName("com.xiaoji.cordova.plugin.rabbitmq", "com.xiaoji.cordova.plugin.rabbitmq.RabbitMQReceiver"));
                           sendIntent.putExtra("mwxing", new String(body, "utf-8"));
                           sendBroadcast(sendIntent);
                           Log.i("RabbitMQPlugin", "Broadcast Sent.");
