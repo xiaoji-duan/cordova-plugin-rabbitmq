@@ -119,7 +119,7 @@ public class RabbitMQClientService extends Service {
                           startActivity(sendIntent);
 
                           channel.basicAck(deliveryTag, false);
-                      } catch (JSONException e) {
+                      } catch (Exception e) {
                           Log.e("RabbitMQPlugin", "JSON format error", e.getCause());
                       }
                   }
