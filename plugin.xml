@@ -61,8 +61,8 @@
   </platform>
   <platform name="ios">
     <config-file parent="/*" target="config.xml">
-      <feature name="cordova-plugin-rabbitmq">
-        <param name="ios-package" value="cordova-plugin-rabbitmq" />
+      <feature name="RabbitMQPlugin">
+        <param name="ios-package" value="RabbitMQPlugin" />
       </feature>
     </config-file>
     <source-file src="src/ios/RabbitMQPlugin.m" />
