@@ -50,6 +50,7 @@
               android:permission="com.xiaoji.rabbitmq.MESSAGE_RECEIVED">
           <intent-filter>
               <action android:name="com.xiaoji.rabbitmq.MESSAGE_RECEIVED" />
+              <category android:name="android.intent.category.DEFAULT" />
           </intent-filter>
       </receiver>
     </config-file>

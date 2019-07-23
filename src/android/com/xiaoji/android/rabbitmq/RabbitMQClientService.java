@@ -116,8 +116,10 @@ public class RabbitMQClientService extends Service {
                           Intent sendIntent = new Intent("com.xiaoji.rabbitmq.MESSAGE_RECEIVED");
                           sendIntent.putExtra("mwxing", new String(body, "utf-8"));
                           sendBroadcast(sendIntent);
+                          Log.i("RabbitMQPlugin", "Broadcast Sent.");
 
                           channel.basicAck(deliveryTag, false);
+                          Log.i("RabbitMQPlugin", "Ack committed.");
                       } catch (Exception e) {
                           Log.e("RabbitMQPlugin", "JSON format error", e.getCause());
                       }
