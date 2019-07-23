@@ -46,7 +46,8 @@
       <receiver
               android:name="com.xiaoji.cordova.plugin.rabbitmq.RabbitMQReceiver"
               android:enabled="true"
-              android:exported="true">
+              android:exported="true"
+              android:permission="com.xiaoji.rabbitmq.MESSAGE_RECEIVED">
           <intent-filter>
               <action android:name="com.xiaoji.rabbitmq.MESSAGE_RECEIVED" />
           </intent-filter>
