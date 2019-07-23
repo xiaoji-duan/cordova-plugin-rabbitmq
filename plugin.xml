@@ -49,6 +49,7 @@
               android:exported="true">
           <intent-filter>
               <action android:name="com.xiaoji.cordova.plugin.rabbitmq.MESSAGE_RECEIVED" />
+              <category android:name="$PACKAGE_NAME" />
           </intent-filter>
       </receiver>
     </config-file>
