@@ -9,7 +9,7 @@ import android.content.ComponentName;
 import com.xiaoji.cordova.plugin.rabbitmq.RabbitMQPlugin;
 
 public class RabbitMQInterface {
-    public static void init(Context ctx, RabbitMQPlugin plugin) {
+    public static void init(Context ctx, final RabbitMQPlugin plugin) {
       System.out.println("RabbitMQInterface init");
         Intent intent = new Intent(ctx, RabbitMQClientService.class);
         //ctx.startService(intent);
