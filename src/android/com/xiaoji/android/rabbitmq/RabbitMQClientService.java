@@ -69,8 +69,8 @@ public class RabbitMQClientService extends Service {
       String passwd = intent.getStringExtra("passwd");
 
       // 本地获取的设备ID没有加密, 从队列名中获取
-      if (queueName != null && queueName.contains("\\.")) {
-        String[] t = queueName.split(".");
+      if (queueName != null && queueName.contains(".")) {
+        String[] t = queueName.split("\\.");
         deviceId = t[1];
       }
 
