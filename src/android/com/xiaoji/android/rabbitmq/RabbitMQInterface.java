@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import com.xiaoji.cordova.plugin.rabbitmq.RabbitMQPlugin;
 
@@ -18,10 +19,13 @@ public class RabbitMQInterface {
 
         // 设置初始化参数
         if (args.length() == 3) {
-          intent.putExtra("uid", args.getString(0));
-          intent.putExtra("deviceid", args.getString(1));
-          intent.putExtra("queueName", args.getString(2));
-
+          try {
+            intent.putExtra("uid", args.getString(0));
+            intent.putExtra("deviceid", args.getString(1));
+            intent.putExtra("queueName", args.getString(2));
+          } catch (JSONException e) {
+            Log.e("RabbitMQPlugin", "Arguments json Exception.", e.getCause());
+          }
           //ctx.startService(intent);
           ctx.bindService(intent, new ServiceConnection() {
               @Override
