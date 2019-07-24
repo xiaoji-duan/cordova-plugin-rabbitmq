@@ -36,6 +36,8 @@ public class RabbitMQInterface {
                   // fireEvent(BackgroundMode.Event.FAILURE, "'service disconnected'");
               }
           }, Context.BIND_AUTO_CREATE);
+        } else {
+          Log.i("RabbitMQPlugin", "RabbitMQInterface init with no parameters, service unstarted.");
         }
     }
 }
