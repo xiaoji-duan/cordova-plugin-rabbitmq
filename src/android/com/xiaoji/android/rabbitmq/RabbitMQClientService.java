@@ -152,8 +152,7 @@ public class RabbitMQClientService extends Service {
                       long deliveryTag = envelope.getDeliveryTag();
 
                       try {
-                          payload = new JSONObject(new String(body, "utf-8"));
-                          Log.i("RabbitMQPlugin", payload.toString());
+                          Log.i("RabbitMQPlugin", new String(body, "utf-8"));
                           Intent sendIntent = new Intent("com.xiaoji.cordova.plugin.rabbitmq.MESSAGE_RECEIVED");
                           // Android 8 later
                           //sendIntent.setComponent(new ComponentName("com.xiaoji.cordova.plugin.rabbitmq", "com.xiaoji.cordova.plugin.rabbitmq.RabbitMQReceiver"));
