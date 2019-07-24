@@ -62,7 +62,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
         super.initialize(cordova, webView);
         mContext = cordova.getActivity().getApplicationContext();
 
-        RabbitMQInterface.init(mContext, instance);
+        RabbitMQInterface.init(mContext, instance, new JSONArray());
 
         cordovaActivity = cordova.getActivity();
     }
