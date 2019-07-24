@@ -79,7 +79,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
      * 插件主入口
      */
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, final JSONArray args, CallbackContext callbackContext) throws JSONException {
       Log.i("RabbitMQPlugin", "RabbitMQPlugin action " + action);
       if (action.equals("init")) {
         if (mContext == null) {
