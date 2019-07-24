@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import com.xiaoji.cordova.plugin.rabbitmq.RabbitMQPlugin;
 
 public class RabbitMQInterface {
-    public static void init(Context ctx, final RabbitMQPlugin plugin, JSONArray args) {
+    public static void init(Context ctx, final RabbitMQPlugin plugin, final JSONArray args) {
       Log.i("RabbitMQPlugin", "RabbitMQInterface init");
         Intent intent = new Intent(ctx, RabbitMQClientService.class);
 
