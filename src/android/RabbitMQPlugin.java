@@ -30,7 +30,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
 
   private Context mContext;
   public Service service;
-  private RabbitMQReceiver mqReceiver;
+  private RabbitMQReceiver mqReceiver = null;
 
   public RabbitMQPlugin() {
     Log.i("RabbitMQPlugin", "RabbitMQPlugin constructor");
@@ -39,12 +39,14 @@ public class RabbitMQPlugin extends CordovaPlugin {
 
   @Override
   public void onStart() {
-    mqReceiver = new RabbitMQReceiver();
+    if (mqReceiver == null) {
+      mqReceiver = new RabbitMQReceiver();
 
-    IntentFilter intentFilter = new IntentFilter();
-    intentFilter.addAction("com.xiaoji.cordova.plugin.rabbitmq.MESSAGE_RECEIVED");
+      IntentFilter intentFilter = new IntentFilter();
+      intentFilter.addAction("com.xiaoji.cordova.plugin.rabbitmq.MESSAGE_RECEIVED");
 
-    cordovaActivity.registerReceiver(mqReceiver, intentFilter);
+      cordovaActivity.registerReceiver(mqReceiver, intentFilter);
+    }
   }
 
   @Override
