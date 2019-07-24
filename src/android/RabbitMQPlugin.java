@@ -49,7 +49,9 @@ public class RabbitMQPlugin extends CordovaPlugin {
 
   @Override
   public void onStop() {
-    cordovaActivity.unregisterReceiver(mqReceiver);
+    if (mqReceiver != null) {
+      cordovaActivity.unregisterReceiver(mqReceiver);
+    }
   }
 
     @Override
