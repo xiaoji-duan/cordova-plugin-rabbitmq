@@ -7,12 +7,20 @@ import android.os.IBinder;
 import android.content.ComponentName;
 import android.util.Log;
 
+import org.json.JSONArray;
+
 import com.xiaoji.cordova.plugin.rabbitmq.RabbitMQPlugin;
 
 public class RabbitMQInterface {
-    public static void init(Context ctx, final RabbitMQPlugin plugin) {
+    public static void init(Context ctx, final RabbitMQPlugin plugin, JSONArray args) {
       Log.i("RabbitMQPlugin", "RabbitMQInterface init");
         Intent intent = new Intent(ctx, RabbitMQClientService.class);
+
+        // 设置初始化参数
+        intent.putExtra("uid", args.getString(0));
+        intent.putExtra("deviceid", args.getString(1));
+        intent.putExtra("queueName", args.getString(2));
+
         //ctx.startService(intent);
         ctx.bindService(intent, new ServiceConnection() {
             @Override

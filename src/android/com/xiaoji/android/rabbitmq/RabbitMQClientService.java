@@ -16,6 +16,12 @@ import cn.jiguang.api.JCoreInterface;
 import java.io.IOException;
 
 public class RabbitMQClientService extends Service {
+    public String queue = "[queuename]";
+    public String exchange = "exchange.mwxing.direct";
+    public String announceexchange = "exchange.mwxing.fanout";
+    public String routingkey = "mwxing.announce";
+    public String routingkeyAccount = "mwxing.[unionid]";
+    public String routingkeyDevice = "mwxing.[unionid].[deviceId]";
 
     public RabbitMQClientService() {
         Log.i("RabbitMQPlugin", "RabbitMQ");
@@ -48,9 +54,15 @@ public class RabbitMQClientService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        //throw new UnsupportedOperationException("Not yet implemented");
-        return binder;
+      String queueName = intent.getStringExtra("queueName");
+      String deviceId = intent.getStringExtra("deviceid");
+      String uId = intent.getStringExtra("uid");
+
+      RabbitMQClientService.this.queue = queueName;
+      RabbitMQClientService.this.routingkeyAccount = "mwxing." + uId;
+      RabbitMQClientService.this.routingkeyDevice = "mwxing." + uId + "." + deviceId;
+
+      return binder;
     }
 
     public class MyBinder extends Binder {
@@ -100,7 +112,14 @@ public class RabbitMQClientService extends Service {
 
               this.channel = this.conn.createChannel();
 
-              this.channel.basicConsume("queueName", false, "myConsumerTag", new DefaultConsumer(channel) {
+              this.channel.exchangeDeclare(exchange, "direct", true, false, null);
+              this.channel.exchangeDeclare(announceexchange, "fanout", true, false, null);
+              this.channel.queueDeclare(queue, true, false, false, null);
+              this.channel.queueBind(queue, announceexchange, routingkey);
+              this.channel.queueBind(queue, exchange, routingkeyAccount);
+              this.channel.queueBind(queue, exchange, routingkeyDevice);
+
+              this.channel.basicConsume(queue, false, routingkeyDevice, new DefaultConsumer(channel) {
 
                   @Override
                   public void handleDelivery(String consumerTag,

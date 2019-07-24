@@ -84,7 +84,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
         cordova.getThreadPool().execute(new Runnable() {
             @Override
             public void run() {
-              RabbitMQInterface.init(mContext, instance);
+              RabbitMQInterface.init(mContext, instance, args);
             }
         });
         return true;
