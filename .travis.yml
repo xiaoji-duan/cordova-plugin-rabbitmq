@@ -3,6 +3,7 @@ matrix:
   - os: linux
     sudo: true
     language: android
+    dist: trusty
     android:
       components:
       - platform-tools
