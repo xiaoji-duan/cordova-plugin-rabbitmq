@@ -28,8 +28,7 @@
         android:name="com.xiaoji.android.rabbitmq.RabbitMQClientService"
         android:enabled="true"
         android:exported="false"
-        android:permission="android.permission.INTERNET"
-        android:permission="android.permission.ACCESS_NETWORK_STATE">
+        android:permission="android.permission.INTERNET">
       </service>
       <receiver
               android:name="com.xiaoji.android.rabbitmq.RabbitMQEventReceiver"

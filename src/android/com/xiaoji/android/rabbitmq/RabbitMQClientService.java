@@ -116,9 +116,9 @@ public class RabbitMQClientService extends Service {
                           Log.i("RabbitMQPlugin", payload.toString());
                           Intent sendIntent = new Intent("com.xiaoji.cordova.plugin.rabbitmq.MESSAGE_RECEIVED");
                           // Android 8 later
-                          sendIntent.setComponent(new ComponentName("com.xiaoji.cordova.plugin.rabbitmq", "com.xiaoji.cordova.plugin.rabbitmq.RabbitMQReceiver"));
+                          //sendIntent.setComponent(new ComponentName("com.xiaoji.cordova.plugin.rabbitmq", "com.xiaoji.cordova.plugin.rabbitmq.RabbitMQReceiver"));
                           sendIntent.putExtra("mwxing", new String(body, "utf-8"));
-                          sendIntent.addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY);
+                          //sendIntent.addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY);
                           RabbitMQClientService.this.sendBroadcast(sendIntent);
                           Log.i("RabbitMQPlugin", "Broadcast Sent.");
 
