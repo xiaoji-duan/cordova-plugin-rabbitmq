@@ -55,8 +55,8 @@ RabbitMQPlugin.prototype.coolMethod = function() {
 
 RabbitMQPlugin.prototype.receivedMessageInAndroidCallback = function(data) {
   if (device.platform === "Android") {
-    data = JSON.stringify(data);
-    var event = JSON.parse(data);
+    var val = JSON.stringify(data);
+    var event = JSON.parse(val);
     cordova.fireDocumentEvent("rabbitmq.receivedMessage", event);
   }
 };
