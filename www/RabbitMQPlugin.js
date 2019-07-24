@@ -52,6 +52,14 @@ RabbitMQPlugin.prototype.coolMethod = function() {
   }
 };
 
+RabbitMQPlugin.prototype.receivedMessageInAndroidCallback = function(data) {
+  if (device.platform === "Android") {
+    data = JSON.stringify(data);
+    var event = JSON.parse(data);
+    cordova.fireDocumentEvent("rabbitmq.receivedMessage", event);
+  }
+};
+
 if (!window.plugins) {
   window.plugins = {};
 }
