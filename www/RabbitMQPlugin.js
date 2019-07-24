@@ -34,13 +34,13 @@ RabbitMQPlugin.prototype.callNative = function(
   }
 };
 
-RabbitMQPlugin.prototype.init = function(uid, deviceid, queueName) {
+RabbitMQPlugin.prototype.init = function(uid, deviceid, queueName, host, port, user, passwd) {
   if (this.isPlatformIOS()) {
     console.log("RabbitMQPlugin.prototype.initial");
-    this.callNative("initial", [uid, deviceid, queueName], null);
+    this.callNative("initial", [uid, deviceid, queueName, host, port, user, passwd], null);
   } else {
     console.log("RabbitMQPlugin.prototype.init");
-    this.callNative("init", [uid, deviceid, queueName], null);
+    this.callNative("init", [uid, deviceid, queueName, host, port, user, passwd], null);
   }
 };
 

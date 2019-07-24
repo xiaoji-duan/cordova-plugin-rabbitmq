@@ -18,11 +18,15 @@ public class RabbitMQInterface {
         Intent intent = new Intent(ctx, RabbitMQClientService.class);
 
         // 设置初始化参数
-        if (args.length() == 3) {
+        if (args.length() == 7) {
           try {
             intent.putExtra("uid", args.getString(0));
             intent.putExtra("deviceid", args.getString(1));
             intent.putExtra("queueName", args.getString(2));
+            intent.putExtra("host", args.getString(3));
+            intent.putExtra("port", args.getString(4));
+            intent.putExtra("user", args.getString(5));
+            intent.putExtra("passwd", args.getString(6));
           } catch (JSONException e) {
             Log.e("RabbitMQPlugin", "Arguments json Exception.", e.getCause());
           }

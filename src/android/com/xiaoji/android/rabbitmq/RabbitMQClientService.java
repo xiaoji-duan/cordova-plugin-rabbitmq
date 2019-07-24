@@ -23,6 +23,11 @@ public class RabbitMQClientService extends Service {
     public String routingkeyAccount = "mwxing.[unionid]";
     public String routingkeyDevice = "mwxing.[unionid].[deviceId]";
 
+    public String host = "localhost";
+    public Integer port = 5672;
+    public String user = "guest";
+    public String passwd = "guest";
+
     public RabbitMQClientService() {
         Log.i("RabbitMQPlugin", "RabbitMQ");
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -58,9 +63,19 @@ public class RabbitMQClientService extends Service {
       String deviceId = intent.getStringExtra("deviceid");
       String uId = intent.getStringExtra("uid");
 
+      String host = intent.getStringExtra("host");
+      String port = intent.getStringExtra("port");
+      String user = intent.getStringExtra("user");
+      String passwd = intent.getStringExtra("passwd");
+
       RabbitMQClientService.this.queue = queueName;
       RabbitMQClientService.this.routingkeyAccount = "mwxing." + uId;
       RabbitMQClientService.this.routingkeyDevice = "mwxing." + uId + "." + deviceId;
+
+      RabbitMQClientService.this.host = host;
+      RabbitMQClientService.this.port = Integer.valueOf(port);
+      RabbitMQClientService.this.user = user;
+      RabbitMQClientService.this.passwd = passwd;
 
       return binder;
     }
@@ -97,10 +112,10 @@ public class RabbitMQClientService extends Service {
 
           ConnectionFactory factory = new ConnectionFactory();
           try {
-              factory.setHost("pluto.guobaa.com");
-              factory.setPort(5672);
-              factory.setUsername("gtd_mq");
-              factory.setPassword("gtd_mq");
+              factory.setHost(host);
+              factory.setPort(port);
+              factory.setUsername(user);
+              factory.setPassword(passwd);
               factory.setVirtualHost("/");
               factory.setAutomaticRecoveryEnabled(true);
               factory.setShutdownTimeout(0);
