@@ -15,6 +15,13 @@ import cn.jiguang.api.JCoreInterface;
 
 import java.io.IOException;
 
+/**
+ *
+ * RabbitMQ AMQP协议客户端, 注册成Android服务
+ * 在App运行期间持续接收阿里云数据中心的消息推送
+ * 替代原有的Websocket形式的消息接收
+ *
+ **/
 public class RabbitMQClientService extends Service {
     public String queue = "[queuename]";
     public String exchange = "exchange.mwxing.direct";
