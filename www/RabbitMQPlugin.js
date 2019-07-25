@@ -53,6 +53,7 @@ RabbitMQPlugin.prototype.coolMethod = function() {
   }
 };
 
+// 向Webview发送接收到的数据
 RabbitMQPlugin.prototype.receivedMessageInAndroidCallback = function(data) {
   if (device.platform === "Android") {
     data = JSON.stringify(data);
