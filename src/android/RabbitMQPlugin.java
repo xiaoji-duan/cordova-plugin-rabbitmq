@@ -73,6 +73,7 @@ public class RabbitMQPlugin extends CordovaPlugin {
 
   @Override
   public void onDestroy() {
+    Log.i("RabbitMQPlugin", "RabbitMQ Cordova Plugin onDestroy.");
     if (mqReceiver != null) {
       cordovaActivity.getApplicationContext().unregisterReceiver(mqReceiver);
     }
