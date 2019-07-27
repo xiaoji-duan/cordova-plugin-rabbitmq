@@ -22,8 +22,8 @@ import com.xiaoji.android.rabbitmq.RabbitMQInterface;
 
 /**
  * RabbitMQ Cordova Plugin
- * 是否需要缓存数据
- * 
+ * 是否需要缓存数据(个别手机收不到被共享消息)
+ *
  * This class echoes a string called from JavaScript.
  */
 public class RabbitMQPlugin extends CordovaPlugin {
