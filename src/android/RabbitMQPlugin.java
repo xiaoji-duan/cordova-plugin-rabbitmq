@@ -22,7 +22,8 @@ import com.xiaoji.android.rabbitmq.RabbitMQInterface;
 
 /**
  * RabbitMQ Cordova Plugin
- *
+ * 是否需要缓存数据
+ * 
  * This class echoes a string called from JavaScript.
  */
 public class RabbitMQPlugin extends CordovaPlugin {
