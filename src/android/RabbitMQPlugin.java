@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import com.xiaoji.android.rabbitmq.RabbitMQInterface;
 
 /**
+ * RabbitMQ Cordova Plugin
+ *
  * This class echoes a string called from JavaScript.
  */
 public class RabbitMQPlugin extends CordovaPlugin {
@@ -93,12 +95,14 @@ public class RabbitMQPlugin extends CordovaPlugin {
         });
         return true;
       }
-        if (action.equals("coolMethod")) {
-            String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
-            return true;
-        }
-        return false;
+
+      if (action.equals("coolMethod")) {
+          String message = args.getString(0);
+          this.coolMethod(message, callbackContext);
+          return true;
+      }
+
+      return false;
     }
 
     private void coolMethod(String message, CallbackContext callbackContext) {
