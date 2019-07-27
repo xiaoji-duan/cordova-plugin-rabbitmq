@@ -24,19 +24,17 @@
 @implementation RabbitMQPlugin
 
 - (void)initial:(CDVInvokedUrlCommand*)command{
-    //do nithng,because Cordova plugin use lazy load mode.
-}
+    //初始化访问参数
+    NSDictionary* params = [command.arguments objectAtIndex:0];
+    NSString* uid = params[@"uid"];
+    NSString* deviceid = params[@"deviceid"];
+    NSString* queueName = params[@"queueName"];
+    NSString* host = params[@"host"];
+    NSString* port = params[@"port"];
+    NSString* user = params[@"user"];
+    NSString* passwd = params[@"passwd"];
 
-- (void)start:(CDVInvokedUrlCommand*)command
-{
-  NSDictionary* params = [command.arguments objectAtIndex:0];
-  NSString* uid = params[@"uid"];
-  NSString* deviceid = params[@"deviceid"];
-  NSString* queueName = params[@"queueName"];
-  NSString* host = params[@"host"];
-  NSString* port = params[@"port"];
-  NSString* user = params[@"user"];
-  NSString* passwd = params[@"passwd"];
+    [[[[[[[[self startRabbitMQ] uid: uid] deviceid: deviceid] queueName: queueName] host: host] port: port] user: user] passwd: passwd];
 }
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command
