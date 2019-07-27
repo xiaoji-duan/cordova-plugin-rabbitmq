@@ -53,6 +53,13 @@ RabbitMQPlugin.prototype.coolMethod = function() {
   }
 };
 
+// iOS methods
+RabbitMQPlugin.prototype.start = function() {
+  if (this.isPlatformIOS()) {
+    this.callNative("start", [], null);
+  }
+};
+
 // 向Webview发送接收到的数据
 RabbitMQPlugin.prototype.receivedMessageInAndroidCallback = function(data) {
   if (device.platform === "Android") {

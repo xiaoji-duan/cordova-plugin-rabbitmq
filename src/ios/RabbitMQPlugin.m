@@ -3,6 +3,24 @@
 #import "RabbitMQPlugin.h"
 #import <RMQClient/RMQClient.h>
 
+@implementation NSDictionary (JPush)
+-(NSString*)toJsonString{
+    NSError  *error;
+    NSData   *data       = [NSJSONSerialization dataWithJSONObject:self options:0 error:&error];
+    NSString *jsonString = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    return jsonString;
+}
+@end
+
+@implementation NSString (JPush)
+-(NSDictionary*)toDictionary{
+    NSError      *error;
+    NSData       *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *dict     = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+    return dict;
+}
+@end
+
 @implementation RabbitMQPlugin
 
 - (void)initial:(CDVInvokedUrlCommand*)command{
