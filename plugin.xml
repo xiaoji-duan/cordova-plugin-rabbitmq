@@ -30,15 +30,6 @@
         android:exported="false"
         android:permission="android.permission.INTERNET">
       </service>
-      <receiver
-              android:name="com.xiaoji.cordova.plugin.rabbitmq.RabbitMQReceiver"
-              android:enabled="true"
-              android:exported="true">
-          <intent-filter>
-              <action android:name="com.xiaoji.cordova.plugin.rabbitmq.MESSAGE_RECEIVED" />
-              <category android:name="$PACKAGE_NAME" />
-          </intent-filter>
-      </receiver>
     </config-file>
 
     <lib-file src="libs/android/amqp-client-4.11.2.jar" />
