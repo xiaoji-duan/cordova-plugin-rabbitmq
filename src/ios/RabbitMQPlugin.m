@@ -12,7 +12,7 @@
 }
 @end
 
-@implementation NSString (JPush)
+@implementation NSString (RabbitMQ)
 -(NSDictionary*)toDictionary{
     NSError      *error;
     NSData       *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
