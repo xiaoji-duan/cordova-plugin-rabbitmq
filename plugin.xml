@@ -49,5 +49,6 @@
     </config-file>
     <header-file src="src/ios/RabbitMQPlugin.h" />
     <source-file src="src/ios/RabbitMQPlugin.m" />
+    <framework src="RMQClient.framework" weak="true" />
   </platform>
 </plugin>
