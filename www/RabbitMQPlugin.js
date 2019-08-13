@@ -59,6 +59,10 @@ RabbitMQPlugin.prototype.receivedMessageInAndroidCallback = function(data) {
     data = JSON.stringify(data);
     var event = JSON.parse(data);
     cordova.fireDocumentEvent("rabbitmq.receivedMessage", event);
+  } else {
+    data = JSON.stringify(data);
+    var event = JSON.parse(data);
+    cordova.fireDocumentEvent("rabbitmq.receivedMessage", event);
   }
 };
 
