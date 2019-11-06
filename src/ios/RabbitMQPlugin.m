@@ -3,7 +3,7 @@
 #import "RabbitMQPlugin.h"
 #import <RMQClient/RMQClient.h>
 
-@implementation NSDictionary (JPush)
+@implementation NSDictionary (RabbitMQ)
 -(NSString*)toJsonString{
     NSError  *error;
     NSData   *data       = [NSJSONSerialization dataWithJSONObject:self options:0 error:&error];
@@ -25,16 +25,19 @@
 
 - (void)initial:(CDVInvokedUrlCommand*)command{
     //初始化访问参数
-    NSDictionary* params = [command.arguments objectAtIndex:0];
-    NSString* uid = params[@"uid"];
-    NSString* deviceid = params[@"deviceid"];
-    NSString* queueName = params[@"queueName"];
-    NSString* host = params[@"host"];
-    NSString* port = params[@"port"];
-    NSString* user = params[@"user"];
-    NSString* passwd = params[@"passwd"];
+    //NSDictionary* params = [command.arguments objectAtIndex:0];
+    NSString *uid =  [command argumentAtIndex:0];
+    NSString *deviceid =  [command argumentAtIndex:1];
+    NSString *queueName =  [command argumentAtIndex:2];
+    NSString *host =  [command argumentAtIndex:3];
+    NSNumber *port =  [command argumentAtIndex:4];
+    NSString *user = [command argumentAtIndex:5];
+    NSString *passwd =  [command argumentAtIndex:6];
+    
+    NSLog(@"uid=%@;deviceid=%@;queueName=%@;host=%@;user=%@;passwd=%@", uid,deviceid,queueName,host,user,passwd);
 
-    [[[[[[[[self startRabbitMQ] uid: uid] deviceid: deviceid] queueName: queueName] host: host] port: port] user: user] passwd: passwd];
+//    [[[[[[[[self startRabbitMQ] uid: uid] deviceid: deviceid] queueName: queueName] host: host] port: port] user: user] passwd: passwd];
+    [self startRabbitMQ:uid deviceid:deviceid queueName:queueName host:host port:port user:user passwd:passwd];
 }
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command
@@ -75,30 +78,64 @@
         SharedRabbitMQPlugin = self;
     }
 
-    [self startRabbitMQ];
+   // [self startRabbitMQ];
 }
 
--(void)startRabbitMQ:(NSString*)uid deviceid:(NSString*)deviceid queueName:(NSString*)queueName host:(NSString*)host port:(NSString*)port user:(NSString*)user passwd:(NSString*)passwd
+-(void)startRabbitMQ:(NSString*)uid deviceid:(NSString*)deviceid queueName:(NSString*)queueName host:(NSString*)host port:(NSNumber*)port user:(NSString*)user passwd:(NSString*)passwd
 {
     NSString * const url5 = [[NSString alloc] initWithFormat:@"amqp://%@:%@@%@:%@", user, passwd, host, port];
     // Do any additional setup after loading the view.
-    RMQConnectionDelegateLogger * const delegate = [[RMQConnectionDelegateLogger alloc] init]; // implement RMQConnectionDelegate yourself to react to errors
-    RMQConnection * const conn = [[RMQConnection alloc] initWithUri:url5 delegate:delegate];
+//    RMQConnectionDelegateLogger * const delegate = [[RMQConnectionDelegateLogger alloc] init]; // implement RMQConnectionDelegate yourself to react to errors
+    RMQConnection * const conn = [[RMQConnection alloc] initWithUri:url5 delegate:[RMQConnectionDelegateLogger new]];
 
     [conn start];
     id<RMQChannel> ch = [conn createChannel];
+    
+    RMQQueue *q = [ch queue:queueName options:RMQQueueDeclareDurable];
+    
+    //RMQExchange *x = [ch fanout:@"exchange.mwxing.fanout"];
+    
+    //RMQExchange *x1 = [ch direct:@"exchange.mwxing.direct"];
+    
+    
+    //"mwxing.announce";
+    
+    
+    [ch queueBind:queueName exchange:@"exchange.mwxing.fanout" routingKey:@"mwxing.announce"];
+    //[q bind: x routingKey:@"mwxing.announce"];
+    
+    //"mwxing.[unionid]";
+    
+    [ch queueBind:queueName exchange:@"exchange.mwxing.direct" routingKey:[[NSString alloc] initWithFormat:@"mwxing.%@", uid]];
+    //[q bind: x1 routingKey:[[NSString alloc] initWithFormat:@"mwxing.%@", uid]];
+    
+    //public String routingkeyDevice = "mwxing.[unionid].[deviceId]";
+    NSArray *array = [queueName componentsSeparatedByString:@"."];
+    
+    [ch queueBind:queueName exchange: @"exchange.mwxing.direct" routingKey:[[NSString alloc] initWithFormat:@"mwxing.%@.%@", uid,array[1]]];
+    //[q bind:x1 routingKey:[[NSString alloc] initWithFormat:@"mwxing.%@.%@", uid,array[1]]];
 
     RMQBasicConsumeOptions option = RMQBasicConsumeNoAck;
-    [ch basicConsume:@(queueName) options:option handler:^(RMQMessage *received){
+    [ch basicConsume: queueName options:option handler:^(RMQMessage *received){
+        
         NSString* body = [[NSString alloc] initWithData:[received body] encoding:NSUTF8StringEncoding];
+                          
+        NSDictionary *finishDic;
+        finishDic = [NSDictionary dictionaryWithObjectsAndKeys:
+                     body, @"body",nil];
         NSLog(@"%@", body);
+        
+        [RabbitMQPlugin fireDocumentEvent:@"receivedMessage"
+                                 jsString:[finishDic toJsonString]];
     }];
 }
 
 +(void)fireDocumentEvent:(NSString*)eventName jsString:(NSString*)jsString{
     if (SharedRabbitMQPlugin) {
+        //RabbitMQPlugin.receivedMessageInAndroidCallback
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SharedRabbitMQPlugin.commandDelegate evalJs:[NSString stringWithFormat:@"cordova.fireDocumentEvent('jpush.%@',%@)", eventName, jsString]];
+            [SharedRabbitMQPlugin.commandDelegate evalJs:[NSString stringWithFormat:@"cordova.fireDocumentEvent('rabbitmq.%@',%@)", eventName, jsString]];
         });
         return;
     }
