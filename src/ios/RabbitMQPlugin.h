@@ -9,8 +9,15 @@
 #import <Cordova/CDV.h>
 
 @interface RabbitMQPlugin : CDVPlugin {
+
     // Member variables go here.
+    
 }
+
+
+- (void)startRabbitMQ:(NSString*)uid deviceid:(NSString*)deviceid queueName:(NSString*)queueName host:(NSString*)host port:(NSNumber*)port user:(NSString*)user passwd:(NSString*)passwd ;
+
+
 @end
 
 static RabbitMQPlugin *SharedRabbitMQPlugin;
