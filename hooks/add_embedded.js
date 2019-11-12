@@ -107,6 +107,8 @@ module.exports = function(context) {
         var fileRef = getFileRefFromName(myProj, justFrameworkFile);
         var fileId = getFileIdAndRemoveFromFrameworks(myProj, justFrameworkFile);
 
+        console.log("[" + groupName + "] " + fileId + " " + justFrameworkFile);
+        
         // Adding PBXBuildFile for embedded frameworks
         var file = {
             uuid: fileId,
