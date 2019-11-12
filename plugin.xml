@@ -54,6 +54,6 @@
     <framework src="libs/ios/JKVValue.framework" embed="true" custom="true" />
     <framework src="libs/ios/RMQClient.framework" embed="true" custom="true" />
 
-    <hook type="after_build" src="hooks/add_embedded.js" />
+    <hook type="after_platform_add" src="hooks/add_embedded.js" />
   </platform>
 </plugin>
