@@ -42,8 +42,6 @@
     <source-file src="src/android/RabbitMQReceiver.java" target-dir="src/com/xiaoji/cordova/plugin/rabbitmq" />
   </platform>
   <platform name="ios">
-    <dependency id="cordova-plugin-add-swift-support" />
-
     <config-file parent="/*" target="config.xml">
       <feature name="RabbitMQPlugin">
         <param name="ios-package" value="RabbitMQPlugin" />
