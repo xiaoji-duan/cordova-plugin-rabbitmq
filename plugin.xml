@@ -4,6 +4,7 @@
 
   <dependency id="cordova-plugin-device" />
   <dependency id="cordova-plugin-jcore" />
+  <dependency id="cordova-plugin-add-swift-support" />
 
   <js-module name="RabbitMQPlugin" src="www/RabbitMQPlugin.js">
     <clobbers target="cordova.plugins.RabbitMQPlugin" />
