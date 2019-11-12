@@ -3,7 +3,7 @@
 if [ $TRAVIS_OS_NAME = 'osx' ]; then
   gem install xcpretty
   brew install yarn
-  npm install -g ionic@4.1.2 phonegap plugman cordova@6.5.0
+  npm install -g ionic@4.1.2 phonegap plugman cordova@6.5.0 xcode
 else
   yarn global add ionic@4.1.2 phonegap plugman cordova@6.5.0
   mkdir -p $ANDROID_HOME/licenses
