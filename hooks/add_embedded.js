@@ -46,7 +46,7 @@ module.exports = function(context) {
             var frameworkBuildPhaseFile = pbxFrameworksBuildPhaseObjFiles[i];
             if(frameworkBuildPhaseFile.comment && frameworkBuildPhaseFile.comment.indexOf(fileBasename) != -1) {
                 fileId = frameworkBuildPhaseFile.value;
-                //pbxFrameworksBuildPhaseObjFiles.splice(i,1); // MUST remove from frameworks build phase or else CodeSignOnCopy won't do anything.
+                pbxFrameworksBuildPhaseObjFiles.splice(i,1); // MUST remove from frameworks build phase or else CodeSignOnCopy won't do anything.
                 break;
             }
         }
@@ -112,7 +112,7 @@ module.exports = function(context) {
             uuid: fileId,
             basename: justFrameworkFile,
             settings: {
-                ATTRIBUTES: ["CodeSignOnCopy", "RemoveHeadersOnCopy"]
+                ATTRIBUTES: ["RemoveHeadersOnCopy"]
             },
 
             fileRef:fileRef,
