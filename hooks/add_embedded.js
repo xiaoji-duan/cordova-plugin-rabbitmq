@@ -111,7 +111,7 @@ module.exports = function(context) {
         
         var defAttributes = ["RemoveHeadersOnCopy"];
         
-        if (justFrameworkFile == 'CocoaAsyncSocket.framework') {
+        if (justFrameworkFile == 'CocoaAsyncSocket.framework' || justFrameworkFile == 'JKVValue.framework') {
           defAttributes = ["CodeSignOnCopy", "RemoveHeadersOnCopy"];
         }
         
