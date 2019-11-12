@@ -51,8 +51,8 @@
     <header-file src="src/ios/RabbitMQPlugin.h" />
     <source-file src="src/ios/RabbitMQPlugin.m" />
 
-    <framework src="src/libs/ios/CocoaAsyncSocket.framework" embed="true" custom="true" />
-    <framework src="src/libs/ios/JKVValue.framework" embed="true" custom="true" />
-    <framework src="src/libs/ios/RMQClient.framework" embed="true" custom="true" />
+    <framework src="libs/ios/CocoaAsyncSocket.framework" embed="true" custom="true" />
+    <framework src="libs/ios/JKVValue.framework" embed="true" custom="true" />
+    <framework src="libs/ios/RMQClient.framework" embed="true" custom="true" />
   </platform>
 </plugin>
