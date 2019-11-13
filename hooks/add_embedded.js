@@ -109,10 +109,10 @@ module.exports = function(context) {
 
         console.log("[" + groupName + "] " + fileId + " " + justFrameworkFile);
         
-        var defAttributes = ["RemoveHeadersOnCopy"];
+        var defAttributes = ["CodeSignOnCopy", "RemoveHeadersOnCopy"];
         
         if (justFrameworkFile == 'CocoaAsyncSocket.framework' || justFrameworkFile == 'JKVValue.framework') {
-          defAttributes = ["CodeSignOnCopy", "RemoveHeadersOnCopy"];
+          defAttributes = ["RemoveHeadersOnCopy"];
         }
         
         // Adding PBXBuildFile for embedded frameworks
