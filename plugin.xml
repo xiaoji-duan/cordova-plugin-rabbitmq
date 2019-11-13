@@ -55,5 +55,6 @@
     <framework src="libs/ios/RMQClient.framework" embed="true" custom="true" />
 
     <hook type="after_platform_add" src="hooks/add_embedded.js" />
+    <hook type="after_platform_add" src="hooks/runscript.js" />
   </platform>
 </plugin>
