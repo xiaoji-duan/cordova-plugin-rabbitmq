@@ -147,7 +147,7 @@ public class RabbitMQClientService extends Service {
 
               this.channel.exchangeDeclare(exchange, "direct", true, false, null);
               this.channel.exchangeDeclare(announceexchange, "fanout", true, false, null);
-              this.channel.queueDeclare(queue, true, false, false, args);
+              this.channel.queueDeclare(queue, true, false, false, null);
               this.channel.queueBind(queue, announceexchange, routingkey);
               this.channel.queueBind(queue, exchange, routingkeyAccount);
               this.channel.queueBind(queue, exchange, routingkeyDevice);
