@@ -133,11 +133,12 @@ public class RabbitMQPlugin extends CordovaPlugin {
     String format = "window.plugins.RabbitMQPlugin.receivedMessageInAndroidCallback(%s);";
     final String js = String.format(format, message.toString());
     Log.i("RabbitMQPlugin", js);
-    cordovaActivity.runOnUiThread(new Runnable() {
-        @Override
-        public void run() {
-            instance.webView.loadUrl("javascript:" + js);
-        }
-    });
+    instance.webView.loadUrl("javascript:" + js);
+//     cordovaActivity.runOnUiThread(new Runnable() {
+//         @Override
+//         public void run() {
+//             instance.webView.loadUrl("javascript:" + js);
+//         }
+//     });
   }
 }
